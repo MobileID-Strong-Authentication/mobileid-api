@@ -15,6 +15,7 @@
     xmlns:mss="http://uri.etsi.org/TS102204/v1.1.2#"  
     xmlns:mcs="http://www.methics.fi/TS102204/ext/v1.0.0"
     xmlns:sco="http://www.swisscom.ch/TS102204/ext/v1.0.0"
+    xmlns:scoas="http://mid.swisscom.ch/TS102204/as/v1.0"
     name="KIURU"
     targetNamespace="http://uri.etsi.org/TS102204/etsi204-kiuru.wsdl">
   
@@ -75,9 +76,13 @@
         <documentation>
           Additional Services defined here:
           - Subscriber Info URI: http://mid.swisscom.ch/as#subscriberInfo
-          
+          - App2App URI: http://mid.swisscom.ch/as#app2app
+          - Geo Fencing     URI: http://mid.swisscom.ch/as#geofencing
+         
           Revision history:
           - September 2014: Initial schema for Swisscom MID additional services
+          - November  2020: Added App2App schema
+          - January   2021: Added GeoFencing schema
         </documentation>
       </annotation>
       <element name="SubscriberInfo">
@@ -92,6 +97,32 @@
         <attribute name="id" type="string"/>
         <attribute name="value" type="string"/>
       </complexType>
+      
+      <xs:complexType name="App2AppReqType"> 
+        <xs:sequence>
+          <xs:element name="RedirectUri" type="xs:string" minOccurs="0" />
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+      
+     <element name="GeoFencing">
+        <complexType>
+			<!-- successful response -->
+			<attribute name="country"      type="string"      use="optional"/>
+			<attribute name="accuracy"     type="string"      use="optional"/>
+			<attribute name="timestamp"    type="dateTime" use="optional"/>
+			<!-- error response -->
+			<attribute name="errorcode"    type="string"      use="optional"/>
+			<attribute name="errormessage" type="string"      use="optional"/>
+        </complexType>
+    </element>
+
+      <xs:complexType name="App2AppRespType">
+        <xs:sequence>
+          <xs:element name="AuthUri" type="xs:string" minOccurs="0" />
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
     </xs:schema>
 
     <xs:schema targetNamespace="http://mss.ficom.fi/TS102204/v1.0.0#"
@@ -109,10 +140,12 @@
             <xs:element name="ServiceResponse" minOccurs="0" maxOccurs="unbounded"> 
               <xs:complexType>
                 <xs:sequence> 
-                  <xs:element name="Description" type="mss:mssURIType"/>
-                  <xs:element name="Entity"       type="mss:MeshMemberType" minOccurs="0" />
-                  <xs:element name="Status"       type="mss:StatusType"     minOccurs="0" />
-                  <xs:element ref="asc:SubscriberInfo" minOccurs="0"/>
+                  <xs:element name="Description"  type="mss:mssURIType"/>
+                  <xs:element name="Entity"       type="mss:MeshMemberType"  minOccurs="0" />
+                  <xs:element name="Status"       type="mss:StatusType"      minOccurs="0" />
+                  <xs:element name="App2App"      type="asc:App2AppRespType" minOccurs="0" />
+                  <xs:element ref="asc:SubscriberInfo"                       minOccurs="0"/>
+                  <xs:element ref="asc:GeoFencing"                           minOccurs="0" />
                   <!-- <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>  -->
                 </xs:sequence>
               </xs:complexType> 
@@ -318,7 +351,7 @@
       </xs:complexType>
       <xs:element name="RecoveryCode" type="xs:string"/>
     </xs:schema>
-
+    
     <xs:schema targetNamespace="http://uri.etsi.org/TS102204/v1.1.2#"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"
@@ -326,6 +359,7 @@
                xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#"
                xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
                xmlns:sco="http://www.swisscom.ch/TS102204/ext/v1.0.0"
+               xmlns:scoas="http://mid.swisscom.ch/TS102204/as/v1.0"
                xmlns:mcs="http://www.methics.fi/TS102204/ext/v1.0.0"
                elementFormDefault="qualified">
       <xs:import namespace="http://mss.ficom.fi/TS102204/v1.0.0#"/>
@@ -532,6 +566,7 @@
                   <xs:element ref="sco:ReceiptRequestExtension"/>
                   <xs:element ref="sco:ReceiptResponseExtension"/>
                   <xs:element ref="mcs:ProfileQueryExtension"/>
+	              <xs:element name="App2App" type="scoas:App2AppReqType"/>
                   <!-- Original ETSI'204 any -->
                   <!-- <xs:any namespace="##other" processContents="lax" /> -->
                 </xs:choice>
