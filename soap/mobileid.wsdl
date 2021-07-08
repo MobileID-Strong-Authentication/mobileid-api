@@ -83,6 +83,7 @@
           - September 2014: Initial schema for Swisscom MID additional services
           - November  2020: Added App2App schema
           - January   2021: Added GeoFencing schema
+          - February  2021: Added confidence attributes
         </documentation>
       </annotation>
       <element name="SubscriberInfo">
@@ -110,10 +111,16 @@
 			<!-- successful response -->
 			<attribute name="country"      type="string"      use="optional"/>
 			<attribute name="accuracy"     type="string"      use="optional"/>
-			<attribute name="timestamp"    type="dateTime" use="optional"/>
+			<attribute name="timestamp"    type="dateTime"    use="optional"/>
+            
+            <attribute name="deviceconfidence"   type="string" use="optional"/>
+			<attribute name="locationconfidence" type="string" use="optional"/>
+            
 			<!-- error response -->
 			<attribute name="errorcode"    type="string"      use="optional"/>
 			<attribute name="errormessage" type="string"      use="optional"/>
+            
+            <anyAttribute namespace="##other" processContents="lax"/>
         </complexType>
     </element>
 
