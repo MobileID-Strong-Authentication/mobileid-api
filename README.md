@@ -6,7 +6,7 @@ The customer-facing API is based on open standard ETSI 102 2041.
 ## Mobile ID Reference Guide
 The Mobile ID Reference Guide provides technical documentation and guidelines to use the Swisscom Mobile ID Authentication Web Service. 
 
-* [mobile-id-reference-guide-v-3-2.pdf](doc/mobile-id-reference-guide-v-3-2.pdf) - Latest Version 3.2
+* [mobile-id-reference-guide-v-*.pdf](doc/)
 
 ## Web Service Description
 Description documents for the Mobile ID SOAP and RESTful web service.
