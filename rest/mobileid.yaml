@@ -4,7 +4,7 @@ info:
   description: | 
    Mobile ID API for requesting mobile signatures. 
 
-  version: 1.0.0
+  version: 1.0.1
 servers:
 - url: https://mobileid.swisscom.com
 tags:
@@ -509,7 +509,8 @@ components:
           type: string
           enum: ['http://mss.ficom.fi/TS102204/v1.0.0#userLang',
                  'http://mid.swisscom.ch/as#geofencing',
-                 'http://mid.swisscom.ch/as#app2app']
+                 'http://mid.swisscom.ch/as#app2app',
+                 'http://mid.swisscom.ch/as#subscriberInfo']
         UserLang:
           type: object
           nullable: true
@@ -538,7 +539,8 @@ components:
         Description:
           type: string
           enum: ['http://mid.swisscom.ch/as#geofencing',
-                 'http://mid.swisscom.ch/as#app2app']
+                 'http://mid.swisscom.ch/as#app2app',
+                 'http://mid.swisscom.ch/as#subscriberInfo']
         Geofencing:
           type: object
           nullable: true
@@ -556,7 +558,7 @@ components:
             LocationConfidence:
               type: string
               example: '1.0'
-            Timestamp":
+            Timestamp:
               type: string
               example: '2021-01-01T11:00:00.000+01:00'
               format: date-time
@@ -574,6 +576,17 @@ components:
             AuthUri:
               type: string
               example: 'mobileid://auth?mobile_auth_redirect_uri=myapp%3A%2F%2Fapp.open%23access_token%3DABCD&session_token=32ffc297-0N5F0yEk2ArMZjFhBWPb4Uifwbk1f3p9ciAURd_QhUQ9e&user_id=32ffc297-ac33-4be2-b3f4-42588502ea0f'
+        SubscriberInfo:
+          description: Response to SubscriberInfo AdditionalService
+          type: object
+          nullable: true
+          properties:
+            Details:
+              type: array
+              items:
+                $ref: '#/components/schemas/Details'
+                
+            
       example: 
         Description: 'http://mid.swisscom.ch/as#app2app'
         App2App:
@@ -671,6 +684,20 @@ components:
       example: 'http://mid.swisscom.ch/STK-LoA4'
       enum: ['http://mid.swisscom.ch/Any-LoA4', 'http://mid.swisscom.ch/MID/v1/AuthProfile1', 'http://mid.swisscom.ch/STK-LoA4', 'http://mid.swisscom.ch/Device-LoA4']
           
+          
+    Details: 
+      description: SubscriberInfo AdditionalService Details. ID 1901 is MCCMNC. 
+      type: object
+      properties:
+        id: 
+          type: string
+          example: '1901'
+        value:
+          type: string
+          example: '26200'
+        
+        
+        
     ProfileStatus:
       type: object
       properties:
@@ -709,6 +736,7 @@ components:
                 $ref: '#/components/schemas/Sscd'
             Sim:
               $ref: '#/components/schemas/Sscd'
+          
     
     
     Sscd:
@@ -727,6 +755,23 @@ components:
           type: string
           example: 'ACTIVE'
           enum: ['ACTIVE', 'INACTIVE', 'REGISTERED']
+        CardDetails:
+          description: Contains user SIM details: MCC, MNC, and network.
+          type: object
+          properties:
+            Mcc:
+              description: SIM MCC. If unknown, value is 000. 
+              type: string
+              example: '228'
+            Mnc:
+              description: SIM MNC. If unknown, value is 00. 
+              type: string
+              example: '01'
+            Network: 
+              description: SIM network name. If unknonw, value is 'Unknown network'. 
+              type: string
+              example: 'Swisscom'
+              
     
     MobileUserCertificate:
       type: object
@@ -752,5 +797,4 @@ components:
               type: string
               example: 'X509_BASE64_SUBJECT_USER'
               format: byte
-
 
