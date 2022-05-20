@@ -756,7 +756,7 @@ components:
           example: 'ACTIVE'
           enum: ['ACTIVE', 'INACTIVE', 'REGISTERED']
         CardDetails:
-          description: Contains user SIM details: MCC, MNC, and network.
+          description: Contains user SIM details (MCC, MNC, and network)
           type: object
           properties:
             Mcc:
