@@ -32,9 +32,6 @@
                xmlns:sco="http://www.swisscom.ch/TS102204/ext/v1.0.0"
                elementFormDefault="qualified">
 
-      <xs:element name="ReceiptRequestExtension" type="sco:ReceiptExtensionType"/>
-      <xs:element name="ReceiptResponseExtension" type="sco:ReceiptExtensionType"/>
-
       <xs:complexType name="ReceiptExtensionType">
         <xs:sequence>
           <xs:element name="ReceiptProfile" type="sco:ReceiptProfileType" minOccurs="0" />
@@ -84,45 +81,53 @@
           - November  2020: Added App2App schema
           - January   2021: Added GeoFencing schema
           - February  2021: Added confidence attributes
+          - February  2023: Added GeoFencing Response schema
+          - June      2023: Cleaned up for dotnet-svcutil
         </documentation>
       </annotation>
-      <element name="SubscriberInfo">
-        <complexType>
-          <sequence>
-            <element name="Detail" type="asc:SubscriberInfoDetail" 
-                     minOccurs="0" maxOccurs="unbounded"/>
-          </sequence>
-        </complexType>
-      </element>
+      <complexType name="SubscriberInfo">
+        <sequence>
+          <element name="Detail" type="asc:SubscriberInfoDetail" 
+                   minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </complexType>
       <complexType name="SubscriberInfoDetail">
         <attribute name="id" type="string"/>
         <attribute name="value" type="string"/>
       </complexType>
       
+      <xs:complexType name="GeoFencingReq">
+        <xs:attribute name="countrywhitelist" type="string"  use="optional"/>
+        <xs:attribute name="countryblacklist" type="string"  use="optional"/>
+        
+        <xs:attribute name="mindeviceconfidence"   type="string" use="optional"/>
+        <xs:attribute name="minlocationconfidence" type="string" use="optional"/>
+        <xs:attribute name="maxtimestampminutes"   type="string" use="optional"/>
+        <xs:attribute name="maxaccuracymeters"     type="string" use="optional"/>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:complexType>
+  
+      <xs:complexType  name="GeoFencing">
+	    <!-- successful response -->
+	    <xs:attribute name="country"            type="string"      use="optional"/>
+	    <xs:attribute name="accuracy"           type="string"      use="optional"/>
+	    <xs:attribute name="timestamp"          type="dateTime"    use="optional"/>
+        <xs:attribute name="deviceconfidence"   type="string"      use="optional"/>
+	    <xs:attribute name="locationconfidence" type="string"      use="optional"/>
+        
+	    <!-- error response -->
+	    <xs:attribute name="errorcode"    type="string"      use="optional"/>
+	    <xs:attribute name="errormessage" type="string"      use="optional"/>
+        
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:complexType>
+    
       <xs:complexType name="App2AppReqType"> 
         <xs:sequence>
           <xs:element name="RedirectUri" type="xs:string" minOccurs="0" />
           <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:complexType>
-      
-     <element name="GeoFencing">
-        <complexType>
-			<!-- successful response -->
-			<attribute name="country"      type="string"      use="optional"/>
-			<attribute name="accuracy"     type="string"      use="optional"/>
-			<attribute name="timestamp"    type="dateTime"    use="optional"/>
-            
-            <attribute name="deviceconfidence"   type="string" use="optional"/>
-			<attribute name="locationconfidence" type="string" use="optional"/>
-            
-			<!-- error response -->
-			<attribute name="errorcode"    type="string"      use="optional"/>
-			<attribute name="errormessage" type="string"      use="optional"/>
-            
-            <anyAttribute namespace="##other" processContents="lax"/>
-        </complexType>
-    </element>
 
       <xs:complexType name="App2AppRespType">
         <xs:sequence>
@@ -141,25 +146,23 @@
       <xs:import namespace="http://mid.swisscom.ch/TS102204/as/v1.0"/>
       <xs:import namespace="http://uri.etsi.org/TS102204/v1.1.2#"/>
       <xs:element name="UserLang" type="xs:string" default="de"/>
-      <xs:element name="ServiceResponses">
-        <xs:complexType>
-          <xs:sequence> 
-            <xs:element name="ServiceResponse" minOccurs="0" maxOccurs="unbounded"> 
-              <xs:complexType>
-                <xs:sequence> 
-                  <xs:element name="Description"  type="mss:mssURIType"/>
-                  <xs:element name="Entity"       type="mss:MeshMemberType"  minOccurs="0" />
-                  <xs:element name="Status"       type="mss:StatusType"      minOccurs="0" />
-                  <xs:element name="App2App"      type="asc:App2AppRespType" minOccurs="0" />
-                  <xs:element ref="asc:SubscriberInfo"                       minOccurs="0"/>
-                  <xs:element ref="asc:GeoFencing"                           minOccurs="0" />
-                  <!-- <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>  -->
-                </xs:sequence>
-              </xs:complexType> 
-            </xs:element> 
-          </xs:sequence> 
-        </xs:complexType>
-      </xs:element>
+      <xs:complexType name="ServiceResponses">
+        <xs:sequence> 
+          <xs:element name="ServiceResponse" minOccurs="0" maxOccurs="unbounded"> 
+            <xs:complexType>
+              <xs:sequence> 
+                <xs:element name="Description"    type="mss:mssURIType"/>
+                <xs:element name="Entity"         type="mss:MeshMemberType"  minOccurs="0" />
+                <xs:element name="Status"         type="mss:StatusType"      minOccurs="0" />
+                <xs:element name="App2App"        type="asc:App2AppRespType" minOccurs="0" />
+                <xs:element name="SubscriberInfo" type="asc:SubscriberInfo"  minOccurs="0"/>
+                <xs:element name="GeoFencing"     type="asc:GeoFencing"      minOccurs="0" />
+                <!-- <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>  -->
+              </xs:sequence>
+            </xs:complexType> 
+          </xs:element> 
+        </xs:sequence> 
+      </xs:complexType>
     </xs:schema>
 
     <xs:schema targetNamespace="http://www.w3.org/2000/09/xmldsig#"
@@ -171,10 +174,9 @@
       <xs:element name="Signature" type="ds:SignatureType"/>
       <xs:complexType name="SignatureType">
         <xs:sequence>
-          <xs:element ref="ds:SignatureValue"/>
+          <xs:element name="SignatureValue" type="ds:SignatureValueType"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="SignatureValue" type="ds:SignatureValueType"/>
       <xs:complexType name="SignatureValueType">
         <xs:simpleContent>
           <xs:extension base="xs:base64Binary"/>
@@ -211,7 +213,7 @@
       <xs:complexType name="Envelope">
         <xs:sequence>
           <xs:element ref="soapenv:Header" minOccurs="0"/>
-          <xs:element ref="soapenv:Body" minOccurs="1"/>
+          <xs:element ref="soapenv:Body"   minOccurs="1"/>
         </xs:sequence>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
       </xs:complexType>
@@ -292,33 +294,25 @@
                elementFormDefault="qualified">
       <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" /> 
       
-      <xs:element name="ProfileQueryExtension">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="MobileUserCertificate"  type="mcs:CertificateType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="AutoActivation"         type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
-            <xs:element name="ServerSideSignature"    type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
-            <xs:element name="RecoveryCodeCreated"    type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
-            <xs:element name="MobileUser" type="mcs:MobileUserType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Sscds"      type="mcs:SscdListType"   minOccurs="0" maxOccurs="1"/>
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:complexType  name="ProfileQueryExtension">
+        <xs:sequence>
+          <xs:element name="MobileUserCertificate"  type="mcs:CertificateType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="AutoActivation"         type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
+          <xs:element name="ServerSideSignature"    type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
+          <xs:element name="RecoveryCodeCreated"    type="xs:boolean"          minOccurs="0" maxOccurs="1"/>
+          <xs:element name="MobileUser" type="mcs:MobileUserType" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="Sscds"      type="mcs:SscdListType"   minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="MobileUserType">   
-        <xs:sequence> 
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence> 
         <xs:attribute name="RecoveryCodeCreated"    type="xs:boolean" use="optional"/> 
         <xs:attribute name="AutoActivation"         type="xs:boolean" use="optional"/> 
         <xs:attribute name="ServerSideSignature"    type="xs:boolean" use="optional"/> 
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:complexType>
       <xs:complexType name="SscdListType">   
         <xs:sequence> 
             <xs:element name="Sim" type="mcs:SscdType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="App" type="mcs:SscdType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="SscdType">   
@@ -328,10 +322,7 @@
             <xs:element name="PinStatus"             type="mcs:PinStatusType"   minOccurs="0" maxOccurs="1"/>
             <xs:element name="MobileUserCertificate" type="mcs:CertificateType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="CardDetails"           type="mcs:CardDetailsType" minOccurs="0" maxOccurs="1"/>
-
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence> 
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:complexType>
       <xs:complexType name="ActivationType">   
         <xs:sequence> 
@@ -339,21 +330,15 @@
         </xs:sequence> 
         <xs:attribute name="name"    type="xs:string"  use="optional"/> 
         <xs:attribute name="success" type="xs:boolean" use="optional"/> 
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:complexType>
-      <xs:complexType name="PinStatusType">   
-        <xs:sequence> 
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence> 
+      <xs:complexType name="PinStatusType">
         <xs:attribute name="blocked" type="xs:boolean" use="optional"/> 
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:complexType>
       <xs:complexType name="CertificateType">
         <xs:complexContent>
           <xs:extension base="ds:X509DataType">
             <xs:attribute name="State"     type="xs:string" use="optional" />
             <xs:attribute name="Algorithm" type="xs:string" use="optional" />
-            <xs:anyAttribute namespace="##any" processContents="lax"/>
           </xs:extension>
         </xs:complexContent>
       </xs:complexType>
@@ -362,9 +347,7 @@
             <xs:element name="MCC"     type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="MNC"     type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Network" type="xs:string" minOccurs="0" maxOccurs="1"/>
-            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence> 
-        <xs:anyAttribute namespace="##any" processContents="lax"/>
       </xs:complexType>
       <xs:element name="RecoveryCode" type="xs:string"/>
     </xs:schema>
@@ -385,6 +368,7 @@
       <xs:import namespace="http://www.w3.org/2001/04/xmlenc#"/>
       <xs:import namespace="http://www.swisscom.ch/TS102204/ext/v1.0.0"/>
       <xs:import namespace="http://www.methics.fi/TS102204/ext/v1.0.0"/>
+      <xs:import namespace="http://mid.swisscom.ch/TS102204/as/v1.0"/>
       <xs:complexType name="MessageAbstractType" abstract="true">
         <xs:sequence>
           <xs:element name="AP_Info">
@@ -555,19 +539,18 @@
           <xs:element name="Base64Signature" type="xs:base64Binary"/>
         </xs:choice>
       </xs:complexType>
-      <xs:element name="MSS_MessageSignature">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element ref="ds:Signature"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:complexType name="MSS_MessageSignature">
+        <xs:sequence>
+          <xs:element ref="ds:Signature"/>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="AdditionalServiceType">
         <xs:sequence>
           <xs:element name="Description" type="mss:mssURIType"/>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="fi:UserLang"/>
-            <xs:element name="App2App" type="scoas:App2AppReqType"/>
+            <xs:element name="App2App"       type="scoas:App2AppReqType"/>
+            <xs:element name="GeoFencingReq" type="scoas:GeoFencingReq" />
             <!-- <xs:any namespace="##other" processContents="lax" /> -->
           </xs:choice>
         </xs:sequence>
@@ -580,10 +563,10 @@
             <xs:complexType>
               <xs:sequence minOccurs="0" maxOccurs="unbounded">
                 <xs:choice>
-                  <xs:element ref="fi:ServiceResponses"/>
-                  <xs:element ref="sco:ReceiptRequestExtension"/>
-                  <xs:element ref="sco:ReceiptResponseExtension"/>
-                  <xs:element ref="mcs:ProfileQueryExtension"/>
+                  <xs:element name="ServiceResponses"         type="fi:ServiceResponses"/>
+                  <xs:element name="ReceiptRequestExtension"  type="sco:ReceiptExtensionType"/>
+                  <xs:element name="ReceiptResponseExtension" type="sco:ReceiptExtensionType"/>
+                  <xs:element name="ProfileQueryExtension"    type="mcs:ProfileQueryExtension"/>
                   <!-- Original ETSI'204 any -->
                   <!-- <xs:any namespace="##other" processContents="lax" /> -->
                 </xs:choice>
@@ -598,35 +581,6 @@
         </xs:sequence>
         <xs:attribute name="Value" type="xs:integer" use="required"/>
       </xs:complexType>
-    </xs:schema>
-    <xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en">
-      <xs:attribute name="lang">
-        <xs:simpleType>
-          <xs:union memberTypes="xs:language">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:enumeration value=""/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="space">
-        <xs:simpleType>
-          <xs:restriction base="xs:NCName">
-            <xs:enumeration value="default"/>
-            <xs:enumeration value="preserve"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="base" type="xs:anyURI"/> 
-      <xs:attribute name="id" type="xs:ID"/> 
-      <xs:attributeGroup name="specialAttrs">
-        <xs:attribute ref="xml:base"/>
-        <xs:attribute ref="xml:lang"/>
-        <xs:attribute ref="xml:space"/>
-        <xs:attribute ref="xml:id"/>
-      </xs:attributeGroup>
     </xs:schema>
 
     <xs:schema
