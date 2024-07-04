@@ -1,0 +1,1240 @@
+{
+	"info": {
+		"_postman_id": "67837ee4-addd-4f30-aa04-40f908af445f",
+		"name": "MobileID-RestAPI",
+		"description": "Mobile ID API for requesting mobile signatures. \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11955048"
+	},
+	"item": [
+		{
+			"name": "rest",
+			"item": [
+				{
+					"name": "service",
+					"item": [
+						{
+							"name": "sign",
+							"item": [
+								{
+									"name": "MSS_Signature (sync / with geolocation)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"MessagingMode\": \"synch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/sign",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"sign"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_SignatureResp: SIGNATURE (500)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"MessagingMode\": \"synch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/sign",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"sign"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 06:53:10 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_SignatureResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.46009.542\",\n            \"Instant\": \"2024-07-02T06:53:09.542Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T06:53:10.507Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"HEhm77lu\",\n        \"MSS_Signature\": {\n            \"Base64Signature\": \"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\"\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"MobileUser\": {\n            \"MSISDN\": \"41700092501\"\n        },\n        \"ServiceResponses\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\",\n                \"Geofencing\": {\n                    \"Accuracy\": \"105\",\n                    \"Country\": \"CH\",\n                    \"DeviceConfidence\": \"0.9\",\n                    \"LocationConfidence\": \"0.9\",\n                    \"Timestamp\": \"2024-07-02T08:53:10.537+02:00\"\n                }\n            }\n        ],\n        \"SignatureProfile\": \"http://mid.swisscom.ch/STK-LoA4\",\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"500\"\n            },\n            \"StatusMessage\": \"SIGNATURE\"\n        }\n    }\n}"
+										},
+										{
+											"name": "Fault: UNKNOWN_CLIENT (105)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"41797895165\"\n        },\n        \"MessagingMode\": \"synch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/sign",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"sign"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 09:07:27 GMT"
+												},
+												{
+													"key": "X-Cnection",
+													"value": "close"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"Fault\": {\n        \"Code\": {\n            \"SubCode\": {\n                \"Value\": \"_105\",\n                \"ValueNs\": \"http://uri.etsi.org/TS102204/v1.1.2#\"\n            },\n            \"Value\": \"Sender\",\n            \"ValueNs\": \"http://www.w3.org/2003/05/soap-envelope\"\n        },\n        \"Detail\": \"MSISDN is unknown\",\n        \"Reason\": \"UNKNOWN_CLIENT\"\n    }\n}"
+										},
+										{
+											"name": "Fault: INAPPROPRIATE_DATA (107)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"MessagingMode\": \"synch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"x\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/sign",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"sign"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:21:32 GMT"
+												},
+												{
+													"key": "X-Cnection",
+													"value": "close"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"Fault\": {\n        \"Code\": {\n            \"SubCode\": {\n                \"Value\": \"_107\",\n                \"ValueNs\": \"http://uri.etsi.org/TS102204/v1.1.2#\"\n            },\n            \"Value\": \"Sender\",\n            \"ValueNs\": \"http://www.w3.org/2003/05/soap-envelope\"\n        },\n        \"Detail\": \"DTBD matching failed\",\n        \"Reason\": \"INAPPROPRIATE_DATA\"\n    }\n}"
+										},
+										{
+											"name": "Fault: EXPIRED_TRANSACTION (208)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"41797895164\"\n        },\n        \"MessagingMode\": \"synch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/sign",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"sign"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 09:08:11 GMT"
+												},
+												{
+													"key": "X-Cnection",
+													"value": "close"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"Fault\": {\n        \"Code\": {\n            \"SubCode\": {\n                \"Value\": \"_208\",\n                \"ValueNs\": \"http://uri.etsi.org/TS102204/v1.1.2#\"\n            },\n            \"Value\": \"Receiver\",\n            \"ValueNs\": \"http://www.w3.org/2003/05/soap-envelope\"\n        },\n        \"Detail\": \"Timed out waiting for an answer from user.\",\n        \"Reason\": \"EXPIRED_TRANSACTION\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "MSS_Signature (async / with geolocation)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"MessagingMode\": \"asynch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/sign",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"sign"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_SignatureResp: REQUEST_OK (100)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_SignatureReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"2\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"MessagingMode\": \"asynch\",\n        \"DataToBeSigned\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{DataToBeSigned}}\"\n        },\n        \"TimeOut\": \"60\",\n        \"SignatureProfile\": \"{{SignatureProfile}}\",\n        \"AdditionalServices\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\"\n            },\n            {\n                \"Description\": \"http://mss.ficom.fi/TS102204/v1.0.0#userLang\",\n                \"UserLang\": {\n                    \"Value\": \"{{UserLang}}\"\n                }\n            }\n        ]\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/sign",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"sign"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:04:15 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_SignatureResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.28299.852\",\n            \"Instant\": \"2024-07-02T08:04:14.852Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T08:04:15.552Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"HEhm82c1\",\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"MobileUser\": {\n            \"MSISDN\": \"41700092501\"\n        },\n        \"SignatureProfile\": \"http://mid.swisscom.ch/STK-LoA4\",\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusMessage\": \"REQUEST_OK\"\n        }\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "status",
+							"item": [
+								{
+									"name": "MSS_StatusReq",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_StatusReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\"\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"status"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_StatusResp: SIGNATURE (500)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_StatusReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\"\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"status"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:04:25 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_StatusResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.92682.372\",\n            \"Instant\": \"2024-07-02T08:04:25.372Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T08:04:25.998Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSS_Signature\": {\n            \"Base64Signature\": \"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\"\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"MobileUser\": {\n            \"MSISDN\": \"41700092501\"\n        },\n        \"ServiceResponses\": [\n            {\n                \"Description\": \"http://mid.swisscom.ch/as#geofencing\",\n                \"Geofencing\": {\n                    \"Accuracy\": \"105\",\n                    \"Country\": \"CH\",\n                    \"DeviceConfidence\": \"0.9\",\n                    \"LocationConfidence\": \"0.9\",\n                    \"Timestamp\": \"2024-07-02T10:04:25.998+02:00\"\n                }\n            }\n        ],\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"500\"\n            },\n            \"StatusMessage\": \"SIGNATURE\"\n        }\n    }\n}"
+										},
+										{
+											"name": "MSS_StatusResp: OUTSTANDING_TRANSACTION (504)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_StatusReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\"\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"status"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:05:36 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_StatusResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.92285.257\",\n            \"Instant\": \"2024-07-02T08:05:36.257Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T08:05:36.881Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"MobileUser\": {\n            \"MSISDN\": \"41797895164\"\n        },\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"504\"\n            },\n            \"StatusMessage\": \"OUTSTANDING_TRANSACTION\"\n        }\n    }\n}"
+										},
+										{
+											"name": "Fault: EXPIRED_TRANSACTION (208)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_StatusReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\"\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"status"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 09:06:30 GMT"
+												},
+												{
+													"key": "X-Cnection",
+													"value": "close"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"Fault\": {\n        \"Code\": {\n            \"SubCode\": {\n                \"Value\": \"_208\",\n                \"ValueNs\": \"http://uri.etsi.org/TS102204/v1.1.2#\"\n            },\n            \"Value\": \"Receiver\",\n            \"ValueNs\": \"http://www.w3.org/2003/05/soap-envelope\"\n        },\n        \"Detail\": \"Original request timed out.\",\n        \"Reason\": \"EXPIRED_TRANSACTION\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "receipt",
+							"item": [
+								{
+									"name": "MSS_Receipt",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_ReceiptReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\",\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Message\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{Message}}\"\n        }\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/receipt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"receipt"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_ReceiptResp: REQUEST_OK (100)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_ReceiptReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\",\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Message\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{Message}}\"\n        }\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/receipt",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"receipt"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:06:40 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_ReceiptResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.41427.300\",\n            \"Instant\": \"2024-07-02T08:06:39.300Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T08:06:40.040Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusMessage\": \"REQUEST_OK\"\n        }\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "MSS_Receipt SYNC with UserResponse (for real SIM only)",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_ReceiptReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\",\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ReceiptRequestExtension\": {\n                    \"ReceiptMessagingMode\": \"synch\",\n                    \"UserAck\": \"true\",\n                    \"ReceiptProfile\": {\n                        \"Language\": \"{{UserLang}}\",\n                        \"ReceiptProfileURI\": \"http://mss.swisscom.ch/synch\"\n                    }\n                }\n            }\n        },\n        \"Message\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{Message}}\"\n        }\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/receipt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"receipt"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_ReceiptResp: User accepted (OK)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_ReceiptReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\",\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ReceiptRequestExtension\": {\n                    \"ReceiptMessagingMode\": \"synch\",\n                    \"UserAck\": \"true\",\n                    \"ReceiptProfile\": {\n                        \"Language\": \"{{UserLang}}\",\n                        \"ReceiptProfileURI\": \"http://mss.swisscom.ch/synch\"\n                    }\n                }\n            }\n        },\n        \"Message\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{Message}}\"\n        }\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/receipt",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"receipt"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 11:19:30 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_ReceiptResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.5519.147\",\n            \"Instant\": \"2024-07-02T11:19:23.146Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T11:19:30.359Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ReceiptResponseExtension\": {\n                    \"ClientAck\": \"false\",\n                    \"NetworkAck\": \"false\",\n                    \"ReceiptMessagingMode\": \"synch\",\n                    \"UserAck\": \"true\",\n                    \"UserResponse\": \"{\\\"status\\\":\\\"OK\\\"}\"\n                }\n            },\n            \"StatusMessage\": \"REQUEST_OK\"\n        }\n    }\n}"
+										},
+										{
+											"name": "MSS_ReceiptResp: User cancelled the request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_ReceiptReq\": {\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MSSP_TransID\": \"{{MSSP_TransID}}\",\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ReceiptRequestExtension\": {\n                    \"ReceiptMessagingMode\": \"synch\",\n                    \"UserAck\": \"true\",\n                    \"ReceiptProfile\": {\n                        \"Language\": \"{{UserLang}}\",\n                        \"ReceiptProfileURI\": \"http://mss.swisscom.ch/synch\"\n                    }\n                }\n            }\n        },\n        \"Message\": {\n            \"MimeType\": \"text/plain\",\n            \"Encoding\": \"UTF-8\",\n            \"Data\": \"{{Message}}\"\n        }\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/receipt",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"receipt"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 11:19:01 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_ReceiptResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.11035.910\",\n            \"Instant\": \"2024-07-02T11:18:53.910Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T11:19:01.156Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MajorVersion\": \"1\",\n        \"MinorVersion\": \"1\",\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ReceiptResponseExtension\": {\n                    \"ClientAck\": \"false\",\n                    \"FaultMessage\": \"User cancelled the request\",\n                    \"NetworkAck\": \"false\",\n                    \"ReceiptMessagingMode\": \"synch\",\n                    \"UserAck\": \"true\",\n                    \"UserResponse\": \"{\\\"status\\\":\\\"CANCEL\\\"}\"\n                }\n            },\n            \"StatusMessage\": \"REQUEST_OK\"\n        }\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "profile",
+							"item": [
+								{
+									"name": "MSS_ProfileQuery",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"MSS_ProfileReq\": {\n        \"MajorVersion\": \"2\",\n        \"MinorVersion\": \"0\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Params\": \"sscds state certs pinstatus rcstatus aastatus carddetails\"\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rest/service/profile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rest",
+												"service",
+												"profile"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "MSS_ProfileResp: REQUEST_OK (100)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_ProfileReq\": {\n        \"MajorVersion\": \"2\",\n        \"MinorVersion\": \"0\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"{{MSISDN}}\"\n        },\n        \"Params\": \"sscds state certs pinstatus rcstatus aastatus carddetails\"\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/profile",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"profile"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 08:06:55 GMT"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=10"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"MSS_ProfileResp\": {\n        \"AP_Info\": {\n            \"AP_ID\": \"mid://dev.swisscom.ch\",\n            \"AP_TransID\": \"POSTMAN.35771.134\",\n            \"Instant\": \"2024-07-02T08:06:55.134Z\"\n        },\n        \"MSSP_Info\": {\n            \"Instant\": \"2024-07-02T08:06:55.757Z\",\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MajorVersion\": \"2\",\n        \"MinorVersion\": \"0\",\n        \"SignatureProfile\": [\n            \"http://mid.swisscom.ch/Any-LoA4\",\n            \"http://mid.swisscom.ch/MID/v1/AuthProfile1\",\n            \"http://mid.swisscom.ch/MID/v1/AuthProfile1.ECC\",\n            \"http://mid.swisscom.ch/STK-LoA4\"\n        ],\n        \"Status\": {\n            \"StatusCode\": {\n                \"Value\": \"100\"\n            },\n            \"StatusDetail\": {\n                \"ProfileQueryExtension\": {\n                    \"MobileUser\": {\n                        \"AutoActivation\": false,\n                        \"RecoveryCodeCreated\": false\n                    },\n                    \"Sscds\": {\n                        \"Sim\": {\n                            \"CardDetails\": {\n                                \"Mcc\": \"228\",\n                                \"Mnc\": \"01\",\n                                \"Network\": \"Swisscom\"\n                            },\n                            \"MobileUserCertificate\": [\n                                {\n                                    \"Algorithm\": \"EC\",\n                                    \"State\": \"ACTIVE\",\n                                    \"X509Certificate\": [\n                                        \"MIIFbDCCAyCgAwIBAgIQYyB+K5AmmqKooERE0sfYeDBBBgkqhkiG9w0BAQowNKAPMA0GCWCGSAFlAwQCAQUAoRwwGgYJKoZIhvcNAQEIMA0GCWCGSAFlAwQCAQUAogMCASAwgZIxHDAaBgNVBAMME1N3aXNzY29tIFJ1YmluIENBIDQxJTAjBgNVBAsMHERpZ2l0YWwgQ2VydGlmaWNhdGUgU2VydmljZXMxHjAcBgNVBGEMFVZBVENILUNIRS0xMDEuNjU0LjQyMzEeMBwGA1UECgwVU3dpc3Njb20gKFNjaHdlaXopIEFHMQswCQYDVQQGEwJjaDAeFw0yMzAxMjMwOTUwMDNaFw0yNjAxMjIwOTUwMDJaMDkxGTAXBgNVBAUTEE1JRENIRU8xNlAxTzZFOTIxHDAaBgNVBAMME01JRENIRU8xNlAxTzZFOTI6UE4wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATQ1YwjXKPiD06rHzIropxighrg6SovqwRrccL4ma7gdFgH+ZNPyLsfjvbZRamHmDKAhbh2bROA801kM1OEp65oo4IBdzCCAXMwHwYDVR0jBBgwFoAUBulK9q7GmpEtiVWhRuFuBf2xuQQwfQYIKwYBBQUHAQEEcTBvMDcGCCsGAQUFBzAChitodHRwOi8vYWlhLnN3aXNzZGlnaWNlcnQuY2gvc2Rjcy1ydWJpbjQuY3J0MDQGCCsGAQUFBzABhihodHRwOi8vb2NzcC5zd2lzc2RpZ2ljZXJ0LmNoL3NkY3MtcnViaW40ME8GA1UdIARIMEYwCAYGBACPegEDMDoGCGCFdAFTHgQEMC4wLAYIKwYBBQUHAgEWIGh0dHA6Ly93d3cuc3dpc3NkaWdpY2VydC5jaC9jcHMvMBMGA1UdJQQMMAoGCCsGAQUFBwMCMDwGA1UdHwQ1MDMwMaAvoC2GK2h0dHA6Ly9jcmwuc3dpc3NkaWdpY2VydC5jaC9zZGNzLXJ1YmluNC5jcmwwHQYDVR0OBBYEFB6mOOcWgo1CcrD5JjThqAh5NC5hMA4GA1UdDwEB/wQEAwIHgDBBBgkqhkiG9w0BAQowNKAPMA0GCWCGSAFlAwQCAQUAoRwwGgYJKoZIhvcNAQEIMA0GCWCGSAFlAwQCAQUAogMCASADggIBAEu/tRjpZqEFS9oqMxltUf60HaXb+1BFBiHm63snzycv9CoCJ046pvSy4dfXdmdCXw4Lolu3sMSCecuYZzlqN2Pxxh7MmYEXM11ZMAobGWY/6ODSdooBJMLXFhkrYTzstLk9yMBmDbiEK7Yl4krSH+HTIqAq9xfSC7Pjis6bXTYYjVnO8ZbMvt4zAaw3RXO7g9Q4omsbLMiJ3JdYvQkHKVOFkz9lz6ZEBxakg/GicseljgzUlugNQvSk13TqNCkdQe4jdJr1F6X6rdNBOqHThCquamFvwVt5vHwV8NhdNq3NMvjf1TLWAyc/N8TQW/ZVqWboH+6r/KssYtdkMDMr+y/t2u++59Xn2GmvHL/8YhutBuXmqAlaU0mFlyQunGM5MfMQsDz2B34ckKhe1Duj3i51f6PMfVz+Do3MX2JazbMBFyNUe78wVfSaHRPtTc4rNhsCbvV7o7cNrMHM+oc89WAfgXNh3M77NQxGVN9AvUqgmd6wWzmccmNCsaCxLRo8VBNFvD4cBGurDi6hABM+O+tlIOog8WEam+i9lAZXWYiwgACwUePzgxe1DO90mLWYPP9BMM0rUdsNXRPY7lMjzqN7xtQUKz6ja/X7zKuo09mfJITy7N7msSfiD9Npc4AQJ23t+fQv2YjdsDbOMPNZ/IaHQoZ/v7svaF1W94tpeqbA\",\n                                        \"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\",\n                                        \"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\"\n                                    ],\n                                    \"X509SubjectName\": [\n                                        \"cn=midcheo16p1o6e92:pn,serialnumber=midcheo16p1o6e92\",\n                                        \"c=ch,o=swisscom (schweiz) ag,organizationidentifier=vatch-che-101.654.423,ou=digital certificate services,cn=swisscom rubin ca 4\",\n                                        \"c=ch,o=swisscom,organizationidentifier=vatch-che-101.654.423,ou=digital certificate services,cn=swisscom root ca 4\"\n                                    ]\n                                }\n                            ],\n                            \"PinStatus\": {\n                                \"Blocked\": false\n                            },\n                            \"State\": \"ACTIVE\"\n                        }\n                    }\n                }\n            },\n            \"StatusMessage\": \"REQUEST_OK\"\n        }\n    }\n}"
+										},
+										{
+											"name": "Fault: UNKNOWN_CLIENT (105)",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"MSS_ProfileReq\": {\n        \"MajorVersion\": \"2\",\n        \"MinorVersion\": \"0\",\n        \"AP_Info\": {\n            \"AP_ID\": \"{{AP_ID}}\",\n            \"AP_PWD\": \"not-used\",\n            \"Instant\": \"{{instant}}\",\n            \"AP_TransID\": \"{{apTransId}}\"\n        },\n        \"MSSP_Info\": {\n            \"MSSP_ID\": {\n                \"URI\": \"http://mid.swisscom.ch/\"\n            }\n        },\n        \"MobileUser\": {\n            \"MSISDN\": \"41797897895165\"\n        },\n        \"Params\": \"sscds state certs pinstatus rcstatus aastatus carddetails\"\n    }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/rest/service/profile",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"rest",
+														"service",
+														"profile"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json;charset=UTF-8"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 02 Jul 2024 09:12:50 GMT"
+												},
+												{
+													"key": "X-Cnection",
+													"value": "close"
+												},
+												{
+													"key": "Server",
+													"value": "Kiuru REST API Server 9040"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"Fault\": {\n        \"Code\": {\n            \"SubCode\": {\n                \"Value\": \"_105\",\n                \"ValueNs\": \"http://uri.etsi.org/TS102204/v1.1.2#\"\n            },\n            \"Value\": \"Sender\",\n            \"ValueNs\": \"http://www.w3.org/2003/05/soap-envelope\"\n        },\n        \"Detail\": \"MSISDN is unknown\",\n        \"Reason\": \"UNKNOWN_CLIENT\"\n    }\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"// Generate a compliant Instant value",
+							"let instant = new Date().toISOString();",
+							"pm.variables.set(\"instant\", instant);",
+							"",
+							"// Generate a compliant AP_TransID value",
+							"let uniquePart = Math.floor(Math.random() * 100000); // Generates a random number between 0 and 99999",
+							"let apTransId = `POSTMAN.${uniquePart}.${new Date().getMilliseconds()}`;",
+							"pm.variables.set(\"apTransId\", apTransId);",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let responseJson = pm.response.json();",
+							"if (responseJson && responseJson.MSS_SignatureResp && responseJson.MSS_SignatureResp.MSSP_TransID) {",
+							"    let msspTransId = responseJson.MSS_SignatureResp.MSSP_TransID;",
+							"    pm.environment.set('MSSP_TransID', msspTransId);",
+							"    console.log(\"Extracted MSSP_TransID: \" + msspTransId);",
+							"} "
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
