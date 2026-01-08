@@ -1,17 +1,14 @@
 openapi: 3.0.3
 info:
   title: Mobile ID REST API
-  description: | 
-   Mobile ID API for requesting mobile signatures. 
-
+  description: |
+    Mobile ID API for requesting mobile signatures. 
   version: 1.0.1
 servers:
-- url: https://mobileid.swisscom.com
+  - url: 'https://mobileid.swisscom.com'
 tags:
-- name: ETSI TS 102 204 REST API
-  description: ETSI TS 102 204 based REST API for requesting Mobile Signature Service
-
-
+  - name: ETSI TS 102 204 REST API
+    description: ETSI TS 102 204 based REST API for requesting Mobile Signature Service
 paths:
   /rest/service/sign:
     post:
@@ -35,17 +32,21 @@ paths:
                       $ref: '#/components/schemas/MSSP_Info'
                     MajorVersion:
                       type: string
-                      enum: ["1"]
+                      enum:
+                        - '1'
                       example: '1'
                     MinorVersion:
                       type: string
-                      enum: ["2"]
+                      enum:
+                        - '2'
                       example: '2'
                     MobileUser:
                       $ref: '#/components/schemas/MobileUser'
                     MessagingMode:
                       type: string
-                      enum: ['asynch', 'synch']
+                      enum:
+                        - asynch
+                        - synch
                     SignatureProfile:
                       $ref: '#/components/schemas/SignatureProfile'
                     TimeOut:
@@ -68,12 +69,14 @@ paths:
                     - SignatureProfile
                     - TimeOut
               required:
-              - MSS_SignatureReq
+                - MSS_SignatureReq
         required: true
-
       responses:
-        "200":
-          description: A Mobile Signature response has been received. Check the StatusCode for details. In asynchorous mode this will never contain a signature, and contains an MSSP_TransId instead.
+        '200':
+          description: >-
+            A Mobile Signature response has been received. Check the StatusCode
+            for details. In asynchorous mode this will never contain a
+            signature, and contains an MSSP_TransId instead.
           content:
             application/json:
               schema:
@@ -89,17 +92,19 @@ paths:
                         $ref: '#/components/schemas/MSSP_Info'
                       MajorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                         example: '1'
                       MinorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                         example: '1'
                       MobileUser:
                         $ref: '#/components/schemas/MobileUser'
                       MSSP_TransID:
                         type: string
-                        example: 'h44okl'
+                        example: h44okl
                       MSS_Signature:
                         $ref: '#/components/schemas/MSS_Signature'
                       Status:
@@ -110,20 +115,19 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ServiceResponse'
-
-        "500":
+        '500':
           description: Mobile Signature request failed. See fault error code for details.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fault'
-
-
   /rest/service/status:
     post:
       tags:
         - ETSI TS 102 204
-      summary: Request the Mobile Signature Service status of an asynchronous signature request.
+      summary: >-
+        Request the Mobile Signature Service status of an asynchronous signature
+        request.
       requestBody:
         description: Status request
         content:
@@ -141,13 +145,15 @@ paths:
                       $ref: '#/components/schemas/MSSP_Info'
                     MajorVersion:
                       type: string
-                      enum: ["1"]
+                      enum:
+                        - '1'
                     MinorVersion:
                       type: string
-                      enum: ["1"]
+                      enum:
+                        - '1'
                     MSSP_TransID:
                       type: string
-                      example: 'h4iof'
+                      example: h4iof
                   required:
                     - AP_Info
                     - MSSP_Info
@@ -157,10 +163,11 @@ paths:
               required:
                 - MSS_StatusReq
         required: true
-
       responses:
-        "200":
-          description: Mobile Signature Service response has been received. Check the StatusCode for details.
+        '200':
+          description: >-
+            Mobile Signature Service response has been received. Check the
+            StatusCode for details.
           content:
             application/json:
               schema:
@@ -175,10 +182,12 @@ paths:
                         $ref: '#/components/schemas/MSSP_Info'
                       MajorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                       MinorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                       MobileUser:
                         $ref: '#/components/schemas/MobileUser'
                       MSS_Signature:
@@ -189,19 +198,21 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ServiceResponse'
-        "500":
-          description: Mobile Signature Service status query failed. See fault error code for details
+        '500':
+          description: >-
+            Mobile Signature Service status query failed. See fault error code
+            for details
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fault'
-
-
   /rest/service/receipt:
     post:
       tags:
         - ETSI TS 102 204
-      summary: Send the Mobile Signature Receipt. You can send the Receipt after a successful Mobile Signature.
+      summary: >-
+        Send the Mobile Signature Receipt. You can send the Receipt after a
+        successful Mobile Signature.
       requestBody:
         description: Mobile Signature Service Receipt request
         content:
@@ -219,10 +230,12 @@ paths:
                       $ref: '#/components/schemas/MSSP_Info'
                     MajorVersion:
                       type: string
-                      enum: ["1"]
+                      enum:
+                        - '1'
                     MinorVersion:
                       type: string
-                      enum: ["1"]
+                      enum:
+                        - '1'
                     MSSP_TransID:
                       $ref: '#/components/schemas/MSSP_TransID'
                     Message:
@@ -244,8 +257,10 @@ paths:
                 - MSS_ReceiptReq
         required: true
       responses:
-        "200":
-          description: Mobile Signature Service Receipt request has been send. Check the Status for details.
+        '200':
+          description: >-
+            Mobile Signature Service Receipt request has been send. Check the
+            Status for details.
           content:
             application/json:
               schema:
@@ -261,19 +276,22 @@ paths:
                         $ref: '#/components/schemas/MSSP_Info'
                       MajorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                       MinorVersion:
                         type: string
-                        enum: ["1"]
+                        enum:
+                          - '1'
                       Status:
                         $ref: '#/components/schemas/ReceiptRespStatus'
-        "500":
-          description: Mobile Signature Service Receipt sending failed. See fault error code for details
+        '500':
+          description: >-
+            Mobile Signature Service Receipt sending failed. See fault error
+            code for details
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fault'
-
   /rest/service/profile:
     post:
       tags:
@@ -296,13 +314,15 @@ paths:
                       $ref: '#/components/schemas/MSSP_Info'
                     MajorVersion:
                       type: string
-                      enum: ["2"]
+                      enum:
+                        - '2'
                     MinorVersion:
                       type: string
-                      enum: ["0"]
+                      enum:
+                        - '0'
                     Params:
                       type: string
-                      example: 'sscds state certs pinstatus rcstatus aastatus'
+                      example: sscds state certs pinstatus rcstatus aastatus
                     MobileUser:
                       $ref: '#/components/schemas/MobileUser'
                   required:
@@ -314,11 +334,12 @@ paths:
                     - MobileUser
               required:
                 - MSS_ProfileReq
-
         required: true
       responses:
-        "200":
-          description: Profile Query succeeded and user is eligible for Mobile Signature Service. See the Status element for profile details of the user.
+        '200':
+          description: >-
+            Profile Query succeeded and user is eligible for Mobile Signature
+            Service. See the Status element for profile details of the user.
           content:
             application/json:
               schema:
@@ -334,27 +355,26 @@ paths:
                         $ref: '#/components/schemas/MSSP_Info'
                       MajorVersion:
                         type: string
-                        enum: ["2"]
+                        enum:
+                          - '2'
                       MinorVersion:
                         type: string
-                        enum: ["0"]
+                        enum:
+                          - '0'
                       SignatureProfile:
                         type: array
                         items:
                           $ref: '#/components/schemas/SignatureProfile'
                       Status:
                         $ref: '#/components/schemas/ProfileStatus'
-        "500":
+        '500':
           description: Profile Query failed. See fault error code for details
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fault'
-
 components:
-
   schemas:
-
     Fault:
       type: object
       properties:
@@ -366,7 +386,7 @@ components:
               properties:
                 Value:
                   type: string
-                  example: 'Receiver'
+                  example: Receiver
                 ValueNs:
                   type: string
                   example: 'http://www.w3.org/2003/05/soap-envelope'
@@ -375,50 +395,45 @@ components:
                   properties:
                     Value:
                       type: string
-                      example: '_401'
+                      example: _401
                     ValueNs:
                       type: string
                       example: 'http://uri.etsi.org/TS102204/v1.1.2#'
             Detail:
               type: string
-              example: 'User cancelled the request'
+              example: User cancelled the request
             Reason:
               type: string
-              example: 'USER_CANCEL'
-
-
+              example: USER_CANCEL
     MSSP_TransID:
       type: string
-      example: 'h4iof'
-
+      example: h4iof
     ReceiptMessage:
       type: object
       properties:
         MimeType:
           type: string
           description: MIME type of the data.
-          example: 'text/plain'
+          example: text/plain
         Encoding:
           type: string
           description: Data encoding
-          example: 'UTF-8'
+          example: UTF-8
         Data:
           type: string
-          example: 'Receipt message'
+          example: Receipt message
       required:
         - MimeType
         - Encoding
         - Data
-
     MSS_Signature:
       type: object
       properties:
         Base64Signature:
           type: string
           description: Signature in Base64 format
-          example: 'MIIIdwYJKoZIhvc...'
+          example: MIIIdwYJKoZIhvc...
           format: byte
-
     DataToBeSigned:
       type: object
       description: Data that the user signs
@@ -426,20 +441,18 @@ components:
         MimeType:
           type: string
           description: MIME type of the data.
-          example: 'text/plain'
+          example: text/plain
         Encoding:
           type: string
           description: Data encoding
-          example: 'UTF-8'
+          example: UTF-8
         Data:
           type: string
-          example: 'Please sign this'
+          example: Please sign this
       required:
         - MimeType
         - Encoding
         - Data
-
-
     MobileUser:
       type: object
       description: Mobile user.
@@ -447,10 +460,9 @@ components:
         MSISDN:
           type: string
           description: User MSISDN
-          example: '+2280112xxx'
+          example: +2280112xxx
       required:
         - MSISDN
-
     MSSP_Info:
       type: object
       properties:
@@ -464,7 +476,6 @@ components:
       required:
         - MSSP_ID
         - Instant
-
     MSSP_ID:
       type: object
       properties:
@@ -473,21 +484,18 @@ components:
           example: 'http://mid.swisscom.ch/'
       required:
         - URI
-
-
-
     AP_Info:
       type: object
       properties:
         AP_ID:
           type: string
-          example: 'your AP_ID'
+          example: your AP_ID
         AP_PWD:
           type: string
-          example: 'your AP_PWD'
+          example: your AP_PWD
         AP_TransID:
           type: string
-          example: 'REF0101120000'
+          example: REF0101120000
         Instant:
           type: string
           example: '2021-04-01T11:00:00.000Z'
@@ -496,27 +504,24 @@ components:
         - AP_ID
         - AP_TransID
         - Instant
-
-
-
     AdditionalService:
       type: object
       description: Additional Service in the Mobile Signature request.
-
       properties:
         Description:
           type: string
-          enum: ['http://mss.ficom.fi/TS102204/v1.0.0#userLang',
-                 'http://mid.swisscom.ch/as#geofencing',
-                 'http://mid.swisscom.ch/as#app2app',
-                 'http://mid.swisscom.ch/as#subscriberInfo']
+          enum:
+            - 'http://mss.ficom.fi/TS102204/v1.0.0#userLang'
+            - 'http://mid.swisscom.ch/as#geofencing'
+            - 'http://mid.swisscom.ch/as#app2app'
+            - 'http://mid.swisscom.ch/as#subscriberInfo'
         UserLang:
           type: object
           nullable: true
           properties:
             Value:
               type: string
-              example: 'DE'
+              example: DE
         App2App:
           type: object
           nullable: true
@@ -527,27 +532,32 @@ components:
       required:
         - Description
       example:
-        Description: http://mss.ficom.fi/TS102204/v1.0.0#userLang
+        Description: 'http://mss.ficom.fi/TS102204/v1.0.0#userLang'
         UserLang:
-          Value: 'DE'
-
+          Value: DE
     ServiceResponse:
       type: object
-      description: Response to a requested Additional Service. One ServiceResponse element contains response of only one AdditionalService. Check the description to resolve which response type it contains.
+      description: >-
+        Response to a requested Additional Service. One ServiceResponse element
+        contains response of only one AdditionalService. Check the description
+        to resolve which response type it contains.
       properties:
         Description:
           type: string
-          enum: ['http://mid.swisscom.ch/as#geofencing',
-                 'http://mid.swisscom.ch/as#app2app',
-                 'http://mid.swisscom.ch/as#subscriberInfo']
+          enum:
+            - 'http://mid.swisscom.ch/as#geofencing'
+            - 'http://mid.swisscom.ch/as#app2app'
+            - 'http://mid.swisscom.ch/as#subscriberInfo'
         Geofencing:
           type: object
           nullable: true
-          description: Response to geofencing AdditionalService. Can be an error, or succesful response. Is an error if ErrorCode is present.
+          description: >-
+            Response to geofencing AdditionalService. Can be an error, or
+            succesful response. Is an error if ErrorCode is present.
           properties:
             Country:
               type: string
-              example: 'CH'
+              example: CH
             Accuracy:
               type: string
               example: '16'
@@ -566,7 +576,7 @@ components:
               example: '100'
             ErrorMessage:
               type: string
-              example: 'Geofencing feature disabled'
+              example: Geofencing feature disabled
         App2App:
           description: Response to App2App AdditionalService.
           type: object
@@ -574,7 +584,8 @@ components:
           properties:
             AuthUri:
               type: string
-              example: 'mobileid://auth?mobile_auth_redirect_uri=myapp%3A%2F%2Fapp.open%23access_token%3DABCD&session_token=32ffc297-0N5F0yEk2ArMZjFhBWPb4Uifwbk1f3p9ciAURd_QhUQ9e&user_id=32ffc297-ac33-4be2-b3f4-42588502ea0f'
+              example: >-
+                mobileid://auth?mobile_auth_redirect_uri=myapp%3A%2F%2Fapp.open%23access_token%3DABCD&session_token=32ffc297-0N5F0yEk2ArMZjFhBWPb4Uifwbk1f3p9ciAURd_QhUQ9e&user_id=32ffc297-ac33-4be2-b3f4-42588502ea0f
         SubscriberInfo:
           description: Response to SubscriberInfo AdditionalService
           type: object
@@ -584,30 +595,25 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Details'
-
-
       example:
         Description: 'http://mid.swisscom.ch/as#app2app'
         App2App:
-          AuthUri:  'mobileid://auth?mobile_auth_redirect_uri=myapp%3A%2F%2Fapp.open%23access_token%3DABCD&session_token=32ffc297-0N5F0yEk2ArMZjFhBWPb4Uifwbk1f3p9ciAURd_QhUQ9e&user_id=32ffc297-ac33-4be2-b3f4-42588502ea0f'
-
-
+          AuthUri: >-
+            mobileid://auth?mobile_auth_redirect_uri=myapp%3A%2F%2Fapp.open%23access_token%3DABCD&session_token=32ffc297-0N5F0yEk2ArMZjFhBWPb4Uifwbk1f3p9ciAURd_QhUQ9e&user_id=32ffc297-ac33-4be2-b3f4-42588502ea0f
     SignatureStatus:
       type: object
       properties:
         StatusMessage:
           type: string
-          example: 'SIGNATURE'
+          example: SIGNATURE
         StatusCode:
           $ref: '#/components/schemas/StatusCode'
-
     StatusCode:
       type: object
       properties:
-          Value:
-            type: string
-            example: '500'
-
+        Value:
+          type: string
+          example: '500'
     ReceiptReqStatus:
       type: object
       properties:
@@ -617,7 +623,8 @@ components:
             Value:
               type: string
               example: '100'
-              enum: ['100']
+              enum:
+                - '100'
         StatusDetail:
           type: object
           properties:
@@ -626,19 +633,22 @@ components:
               properties:
                 ReceiptMessagingMode:
                   type: string
-                  enum: ['synch']
+                  enum:
+                    - synch
                 ReceiptProfile:
                   type: object
                   properties:
                     Language:
                       type: string
-                      example: 'DE'
+                      example: DE
                     ReceiptProfileURI:
                       type: string
                       example: 'http://mss.swisscom.ch/synch'
                 UserAck:
                   type: string
-                  enum: ['true', 'false']
+                  enum:
+                    - 'true'
+                    - 'false'
               required:
                 - ReceiptMessagingMode
                 - ReceiptProfile
@@ -646,7 +656,6 @@ components:
       required:
         - StatusCode
         - StatusDetail
-
     ReceiptRespStatus:
       type: object
       properties:
@@ -664,34 +673,39 @@ components:
               properties:
                 ReceiptMessagingMode:
                   type: string
-                  enum: ['synch']
+                  enum:
+                    - synch
                 UserAck:
                   type: string
-                  enum: ['true', 'false']
+                  enum:
+                    - 'true'
+                    - 'false'
                 ClientAck:
                   type: string
-                  enum: ['true', 'false']
+                  enum:
+                    - 'true'
+                    - 'false'
                 NetworkAck:
                   type: string
-                  enum: ['true', 'false']
+                  enum:
+                    - 'true'
+                    - 'false'
                 UserResponse:
                   type: string
                   example: '{"status":"OK"}'
-
     SignatureProfile:
       type: string
       example: 'http://mid.swisscom.ch/STK-LoA4'
-      enum: ['http://mid.swisscom.ch/Any-LoA4',
-             'http://mid.swisscom.ch/MID/v1/AuthProfile1',
-             'http://mid.swisscom.ch/STK-LoA4',
-             'http://mid.swisscom.ch/Device-LoA4',
-             'http://mid.swisscom.ch/MID/v1/AuthProfile1.ECC',
-             'http://mid.swisscom.ch/MID/v1/AuthProfile1.RSA',
-             'http://mid.swisscom.ch/Any-Geofencing-LoA4',
-             'http://mid.swisscom.ch/MID/v1/OtpProfileFlash',
-             'http://mid.swisscom.ch/MID/v1/OtpProfileText']
-
-
+      enum:
+        - 'http://mid.swisscom.ch/Any-LoA4'
+        - 'http://mid.swisscom.ch/MID/v1/AuthProfile1'
+        - 'http://mid.swisscom.ch/STK-LoA4'
+        - 'http://mid.swisscom.ch/Device-LoA4'
+        - 'http://mid.swisscom.ch/MID/v1/AuthProfile1.ECC'
+        - 'http://mid.swisscom.ch/MID/v1/AuthProfile1.RSA'
+        - 'http://mid.swisscom.ch/Any-Geofencing-LoA4'
+        - 'http://mid.swisscom.ch/MID/v1/OtpProfileFlash'
+        - 'http://mid.swisscom.ch/MID/v1/OtpProfileText'
     Details:
       description: SubscriberInfo AdditionalService Details. ID 1901 is MCCMNC.
       type: object
@@ -702,9 +716,6 @@ components:
         value:
           type: string
           example: '26200'
-
-
-
     ProfileStatus:
       type: object
       properties:
@@ -721,9 +732,7 @@ components:
               $ref: '#/components/schemas/ProfileQueryExtension'
         StatusMessage:
           type: string
-          example: 'REQUEST_OK'
-
-
+          example: REQUEST_OK
     ProfileQueryExtension:
       type: object
       properties:
@@ -743,9 +752,6 @@ components:
                 $ref: '#/components/schemas/Sscd'
             Sim:
               $ref: '#/components/schemas/Sscd'
-
-
-
     Sscd:
       type: object
       properties:
@@ -760,47 +766,49 @@ components:
               type: boolean
         State:
           type: string
-          example: 'ACTIVE'
-          enum: ['ACTIVE', 'INACTIVE', 'REGISTERED']
+          example: ACTIVE
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - REGISTERED
         CardDetails:
-          description: Contains user SIM details (MCC, MNC, and network)
+          description: 'Contains user SIM details (MCC, MNC, and network)'
           type: object
           properties:
             Mcc:
-              description: SIM MCC. If unknown, value is 000.
+              description: 'SIM MCC. If unknown, value is 000.'
               type: string
               example: '228'
             Mnc:
-              description: SIM MNC. If unknown, value is 00.
+              description: 'SIM MNC. If unknown, value is 00.'
               type: string
               example: '01'
             Network:
-              description: SIM network name. If unknonw, value is 'Unknown network'.
+              description: 'SIM network name. If unknonw, value is ''Unknown network''.'
               type: string
-              example: 'Swisscom'
-
-
+              example: Swisscom
     MobileUserCertificate:
       type: object
       properties:
-          Algorithm:
+        Algorithm:
+          type: string
+          example: RSA
+        State:
+          type: string
+          example: ACTIVE
+          enum:
+            - ACTIVE
+            - INACTIVE
+          description: State of the certificate.
+        X509Certificate:
+          type: array
+          items:
             type: string
-            example: 'RSA'
-          State:
+            example: X509_BASE64_CERT_USER
+            format: byte
+        X509SubjectName:
+          type: array
+          items:
             type: string
-            example: 'ACTIVE'
-            enum: ['ACTIVE', 'INACTIVE']
-            description: State of the certificate.
-
-          X509Certificate:
-            type: array
-            items:
-              type: string
-              example: 'X509_BASE64_CERT_USER'
-              format: byte
-          X509SubjectName:
-            type: array
-            items:
-              type: string
-              example: 'X509_BASE64_SUBJECT_USER'
-              format: byte
+            example: X509_BASE64_SUBJECT_USER
+            format: byte
