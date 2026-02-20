@@ -1,10 +1,5 @@
 # Mobile ID API
 
-Swisscom Mobile ID is a cost-efficient, managed authentication service from Swisscom.
-The customer-facing API is based on open standard ETSI 102 2041.
-
-## Documentation
-
 For integration guides and technical documentation, please visit the official Mobile ID documentation:
 
 **[docs.mobileid.ch](https://docs.mobileid.ch/)**
@@ -13,12 +8,6 @@ For integration guides and technical documentation, please visit the official Mo
 - [OIDC Integration Guide](https://docs.mobileid.ch/oidc-integration-guide/)
 - [RADIUS Gateway Guide](https://docs.mobileid.ch/radius-interface-gateway-guide/)
 
-## Web Service Description
-
-Description documents for the Mobile ID SOAP and RESTful web service.
-
-* [mobileid.yaml](rest/mobileid.yaml) - Mobile ID RESTful Web Service OpenAPI Specification
-* [mobileid.wsdl](soap/mobileid.wsdl) - Mobile ID SOAP Web Service Description
 
 ## Mobile ID Root CA Certificate
 
@@ -41,5 +30,6 @@ You can download the certificate also from http://www.swissdigicert.ch
 
 * [Swisscom_Root_CA_2.crt](root-certs/Swisscom_Root_CA_2.crt) - Swisscom Root CA 2 (current)
 * [Swisscom_Root_CA_4.crt](root-certs/Swisscom_Root_CA_4.crt) - Swisscom Root CA 4 (RFU)
+
 
 
